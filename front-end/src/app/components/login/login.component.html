@@ -1,0 +1,37 @@
+<h1 class="page-header text-center">Login Page</h1>
+<hr>
+<div class="row show-hide-message">
+  <div [ngClass] = "messageClass">
+    {{ message }}
+  </div>
+</div>
+
+<form [formGroup] ="form" (submit) = "onLoginSubmit()">
+  <div class="form-group">
+    <label>Username</label>
+    <div [ngClass]="{'has-error': form.controls.username.errors && form.controls.username.dirty, 'has-success': form.controls.username.valid && form.controls.username.dirty }">
+      <input type="text" name="username" class="form-control" formControlName = "username"/>
+    <ul class="help-block">
+      <li *ngIf = "form.controls.username.errors?.required && form.controls.username.dirty" >This is a required field</li>
+    </ul>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <div [ngClass] = "{'has-error' : (form.controls.password.errors && form.controls.password.dirty), 'has-success': !form.controls.password.errors}">
+    <input type="password" name="password" class="form-control" formControlName = "password"/>
+    <ul class="help-block">
+      <li *ngIf = "form.controls.password.errors?.required && form.controls.password.dirty" >This is a required field</li>
+    </ul>
+  </div>
+  </div>
+
+  <input [disabled]="!form.valid || processing" type="submit" class="btn btn-primary" value="Login"/>
+</form>
+
+<!--
+<p>Username:{{ form.controls.username.value }}</p>
+<p>Email:{{ form.controls.email.value }}</p>
+<p>Password:{{ form.controls.password.value }}</p>
+-->
